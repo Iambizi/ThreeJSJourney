@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from 'react';
 import * as THREE from 'three';
-import ReactDOM from "react-dom";
 
 export default function Basic(){
 
@@ -23,14 +22,18 @@ export default function Basic(){
         scene.add(mesh);
 
         //Camera
-        const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height);
+        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+        camera.position.z = 3
         scene.add(camera);
 
+        //Renderer
         const canvas = document.querySelector('.scene');
         console.log(canvas);
         const renderer = new THREE.WebGLRenderer({
             canvas: canvas
         },[])
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.render(scene, camera);
     });
     return(
         <>
