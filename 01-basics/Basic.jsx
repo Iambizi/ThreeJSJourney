@@ -34,6 +34,7 @@ export default function Basic(){
         },[])
         renderer.setSize(sizes.width, sizes.height);
         renderer.render(scene, camera);
+        console.log(mesh.position.length());
     });
     return(
         <>
