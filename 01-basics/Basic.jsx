@@ -9,40 +9,15 @@ export default function Basic(){
         const scene = new THREE.Scene();
 
         //Mesh helper
-        const axesHelper = new THREE.AxesHelper(2);
+        const axesHelper = new THREE.AxesHelper(3);
         scene.add(axesHelper);
 
-        //create group
-        const group = new THREE.Group()
-        group.scale.y = 2
-        group.rotation.y = 0.2
-        scene.add(group)
-
-        //create your objects
-        
-        //object 1
-        const cube1 = new THREE.Mesh(
+        const mesh = new THREE.Mesh(
             new THREE.BoxGeometry(1, 1, 1),
             new THREE.MeshBasicMaterial({ color: 'silver' })
         )
-        cube1.position.x = - 1.5
-        group.add(cube1)
+        scene.add(mesh)
 
-        //object2
-        const cube2 = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial({ color: 'orange' })
-        )
-        cube2.position.x = 0
-        group.add(cube2)
-
-        //object3
-        const cube3 = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial({ color: 'teal' })
-        )
-        cube3.position.x = 1.5
-        group.add(cube3)
         
         //Sizes for camera
         const sizes = {
@@ -63,6 +38,18 @@ export default function Basic(){
 
     renderer.setSize(sizes.width, sizes.height);
     renderer.render(scene, camera);
+
+    // Animations
+    const tick = () =>
+    {
+        //update objects
+        mesh.position.x += 0.01
+        // Render
+        renderer.render(scene, camera);
+
+        window.requestAnimationFrame(tick);
+    }
+    tick()
 
     });
     return(
