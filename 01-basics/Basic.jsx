@@ -39,11 +39,20 @@ export default function Basic(){
     renderer.setSize(sizes.width, sizes.height);
     renderer.render(scene, camera);
 
+    // Time
+    let time = Date.now();
+
     // Animations
     const tick = () =>
-    {
-        //update objects
-        mesh.position.x += 0.01
+    {   
+        //Frame rate adjustment
+        const currentTime = Date.now();
+        const deltaTime = currentTime - time;
+        time = currentTime;
+        console.log(deltaTime);
+
+        //Update objects position
+        mesh.rotation.y += 0.0009 * deltaTime
         // Render
         renderer.render(scene, camera);
 
