@@ -53,6 +53,10 @@ export default function Basic(){
         camera.position.y = Math.sin(elapsedTime);
         // Using a cos() function the animation will rotate like a circle
         camera.position.x = Math.cos(elapsedTime);
+
+        // Camera is rotating while looking at the mesh at all times
+        camera.lookAt(mesh.position)
+
         // Render
         renderer.render(scene, camera);
 
