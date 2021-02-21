@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import * as THREE from 'three';
+import gsap from 'gsap';
 
 export default function Basic(){
-
     useEffect(()=>{
         
         //Creat your scene, (your movie set)
@@ -40,20 +40,18 @@ export default function Basic(){
     renderer.render(scene, camera);
 
     // Clock
-    let clock = new THREE.Clock()
+    // let clock = new THREE.Clock()
+    
+    // Animate mesh position using gsap
+    /* green soap uses its own tick function to update frame rate so you don't need to.
+    However you would still need to render the scene by yourself in you tick function*/
+    gsap.to(mesh.position,{ duration: 1, delay:1, x:2});
+    gsap.to(mesh.position,{ duration: 1, delay:2, x:0});
 
     // Animations
     const tick = () =>
     {   
-        //Frame rate adjustment using clock
-        const elapsedTime = clock.getElapsedTime();
-        console.log(elapsedTime);
-
-        /* Update objects position. If you wrap elapsedTime in a MATH.sin it will alternate between 0 and your value */
-        camera.position.y = Math.sin(elapsedTime);
-        // Using a cos() function the animation will rotate like a circle
-        camera.position.x = Math.cos(elapsedTime);
-
+    
         // Camera is rotating while looking at the mesh at all times
         camera.lookAt(mesh.position)
 
