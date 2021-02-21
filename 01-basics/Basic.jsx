@@ -49,10 +49,8 @@ export default function Basic(){
         const elapsedTime = clock.getElapsedTime();
         console.log(elapsedTime);
 
-        /*Update objects position. Pie equals one half a rotation
-        so if you want one roation per second mutliply by pie x2
-        */
-        mesh.rotation.y = elapsedTime * Math.PI * 2
+        /* Update objects position. If you wrap elapsedTime in a MATH.sin it will alternate between 0 and your value */
+        mesh.position.y = Math.sin(elapsedTime);
         // Render
         renderer.render(scene, camera);
 
