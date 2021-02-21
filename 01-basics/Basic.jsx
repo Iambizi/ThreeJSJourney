@@ -39,20 +39,18 @@ export default function Basic(){
     renderer.setSize(sizes.width, sizes.height);
     renderer.render(scene, camera);
 
-    // Time
-    let time = Date.now();
+    // Clock
+    let clock = new THREE.Clock()
 
     // Animations
     const tick = () =>
     {   
-        //Frame rate adjustment
-        const currentTime = Date.now();
-        const deltaTime = currentTime - time;
-        time = currentTime;
-        console.log(deltaTime);
+        //Frame rate adjustment using clock
+        const elapsedTime = clock.getElapsedTime();
+        console.log(elapsedTime);
 
-        //Update objects position
-        mesh.rotation.y += 0.0009 * deltaTime
+        //Update objects position. No more incrementation
+        mesh.rotation.y = elapsedTime
         // Render
         renderer.render(scene, camera);
 
