@@ -51,6 +51,8 @@ export default function Basic(){
 
         /* Update objects position. If you wrap elapsedTime in a MATH.sin it will alternate between 0 and your value */
         mesh.position.y = Math.sin(elapsedTime);
+        // Using a cos() function the animation will rotate like a circle
+        mesh.position.x = Math.cos(elapsedTime);
         // Render
         renderer.render(scene, camera);
 
