@@ -26,8 +26,23 @@ export default function Basic(){
         }
 
         //camera
-        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+        // const camera = new THREE.PerspectiveCamera(55, sizes.width / sizes.height, 0.1, 100);
+
+        /* When using orthographic cameras, if the width is not equal to your height your left and right values need to take into account aspect ratios by multiplying them to a value holding aspect ratios. */         
+        
+        const aspectRatio = sizes.width / sizes.height;
+        const camera = new THREE.OrthographicCamera(
+            -1 * aspectRatio, 
+            1 * aspectRatio,
+            1,
+            -1,
+            0.1, 100)
+        
+        camera.position.x = 3
+        camera.position.y = 3
         camera.position.z = 3
+
+        camera.lookAt(mesh.position);
 
         //Renderer
         const canvas = document.querySelector('.scene');
@@ -40,21 +55,14 @@ export default function Basic(){
     renderer.render(scene, camera);
 
     // Clock
-    // let clock = new THREE.Clock()
+    let clock = new THREE.Clock()
     
-    // Animate mesh position using gsap
-    /* green soap uses its own tick function to update frame rate so you don't need to.
-    However you would still need to render the scene by yourself in you tick function*/
-    gsap.to(mesh.position,{ duration: 1, delay:1, x:2});
-    gsap.to(mesh.position,{ duration: 1, delay:2, x:0});
-
     // Animations
     const tick = () =>
     {   
-    
-        // Camera is rotating while looking at the mesh at all times
-        camera.lookAt(mesh.position)
+        const elapsedTime = clock.getElapsedTime();
 
+        mesh.rotation.y = elapsedTime
         // Render
         renderer.render(scene, camera);
 
