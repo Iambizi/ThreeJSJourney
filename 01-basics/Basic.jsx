@@ -2,9 +2,28 @@ import React, {useEffect, useRef} from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
+
 export default function Basic(){
+
     useEffect(()=>{
-        
+        /* Custom controls */
+
+        // Cursor: how to control camera with our mouse
+
+        // Stores mouse position in cursor object
+        const cursor = {
+            x: 0,
+            y: 0
+        }
+
+        window.addEventListener('mousemove', (event) =>
+        {
+            cursor.x = event.clientX / sizes.width - 0.5
+            cursor.y = - ( event.clientY / sizes.height - 0.5 )
+
+            console.log(cursor.x, cursor.y)
+        })
+
         //Creat your scene, (your movie set)
         const scene = new THREE.Scene();
 
@@ -26,20 +45,10 @@ export default function Basic(){
         }
 
         //camera
-        // const camera = new THREE.PerspectiveCamera(55, sizes.width / sizes.height, 0.1, 100);
-
-        /* When using orthographic cameras, if the width is not equal to your height your left and right values need to take into account aspect ratios by multiplying them to a value holding aspect ratios. */         
+        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
         
-        const aspectRatio = sizes.width / sizes.height;
-        const camera = new THREE.OrthographicCamera(
-            -1 * aspectRatio, 
-            1 * aspectRatio,
-            1,
-            -1,
-            0.1, 100)
-        
-        camera.position.x = 3
-        camera.position.y = 3
+        // camera.position.x = 3
+        // camera.position.y = 3
         camera.position.z = 3
 
         camera.lookAt(mesh.position);
@@ -62,9 +71,15 @@ export default function Basic(){
     {   
         const elapsedTime = clock.getElapsedTime();
 
-        mesh.rotation.y = elapsedTime
+        // Update camera
+        camera.position.x = cursor.x * 10
+        camera.position.y = cursor.y * 10
+    camera.lookAt(mesh.position)
+
+        // mesh.rotation.y = elapsedTime
         // Render
         renderer.render(scene, camera);
+        
 
         window.requestAnimationFrame(tick);
     }
