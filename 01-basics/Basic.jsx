@@ -72,9 +72,10 @@ export default function Basic(){
         const elapsedTime = clock.getElapsedTime();
 
         // Update camera
-        camera.position.x = cursor.x * 10
-        camera.position.y = cursor.y * 10
-    camera.lookAt(mesh.position)
+        camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 5
+        camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 5
+        camera.position.y = cursor.y * 3
+        camera.lookAt(mesh.position)
 
         // mesh.rotation.y = elapsedTime
         // Render
