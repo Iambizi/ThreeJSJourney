@@ -29,33 +29,7 @@ export default function Basic(){
 
         // Full screen mode on double click
 
-        window.addEventListener('dblclick',() =>{
-
-            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
-
-            if( !fullscreenElement )
-            {
-                if(canvas.requestFullscreen)
-                {
-                    canvas.requestFullscreen()
-
-                }else if(canvas.webkitRequestFullscreen){
-
-                    canvas.webkitRequestFullscreen()
-
-                }
-            }else{
-                if(document.exitFullscreen){
-
-                    document.exitFullscreen()
-
-                } else if(document.webkitExitFullscreen){
-
-                    document.webkitExitFullscreen()
-
-                }
-            }
-        });
+        
 
         //camera
         const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
@@ -70,6 +44,34 @@ export default function Basic(){
 
         //Renderer
         const canvas = document.querySelector('.scene');
+
+        window.addEventListener('dblclick', () =>
+        {
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
+
+            if(!fullscreenElement)
+            {
+                if(canvas.requestFullscreen)
+                {
+                    canvas.requestFullscreen()
+                }
+                else if(canvas.webkitRequestFullscreen)
+                {
+                    canvas.webkitRequestFullscreen()
+                }
+            }
+            else
+            {
+                if(document.exitFullscreen)
+                {
+                    document.exitFullscreen()
+                }
+                else if(document.webkitExitFullscreen)
+                {
+                    document.webkitExitFullscreen()
+                }
+            }
+        })
 
         // Control
         const controls = new OrbitControls(camera, canvas)
