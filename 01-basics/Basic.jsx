@@ -15,8 +15,11 @@ export default function Basic(){
         scene.add(axesHelper);
 
         const mesh = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial({ color: 'silver' })
+            new THREE.BoxGeometry(1, 1, 1, 4, 4, 4),
+            new THREE.MeshBasicMaterial({ 
+                color: 'silver',
+                wireframe: true
+         })
         )
         scene.add(mesh)
 
