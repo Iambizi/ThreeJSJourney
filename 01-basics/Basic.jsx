@@ -30,12 +30,30 @@ export default function Basic(){
         // Full screen mode on double click
 
         window.addEventListener('dblclick',() =>{
-            if( !document.fullscreenElement ){
-                console.log('goo furrScreeenu')
-                canvas.requestFullscreen()
+
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement
+
+            if( !fullscreenElement )
+            {
+                if(canvas.requestFullscreen)
+                {
+                    canvas.requestFullscreen()
+
+                }else if(canvas.webkitRequestFullscreen){
+
+                    canvas.webkitRequestFullscreen()
+
+                }
             }else{
-                console.log('leave fullscreen')
-                document.exitFullscreen()
+                if(document.exitFullscreen){
+
+                    document.exitFullscreen()
+
+                } else if(document.webkitExitFullscreen){
+
+                    document.webkitExitFullscreen()
+
+                }
             }
         });
 
