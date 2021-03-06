@@ -43,6 +43,12 @@ export default function Basic(){
 
         // Control
         const controls = new OrbitControls(camera, canvas)
+        
+        // Damping: allows for smoother controls. Gives a sense of weight to the controls
+        controls.enableDamping = true;
+
+        //Controls speed at which damping will happen 
+        controls.autoRotateSpeed = 3;
 
         const renderer = new THREE.WebGLRenderer({
         canvas: canvas
@@ -55,7 +61,7 @@ export default function Basic(){
     // Clock
     let clock = new THREE.Clock()
     
-    // Animations
+    // Animations loop function
     const tick = () =>
     {   
         const elapsedTime = clock.getElapsedTime();
@@ -66,7 +72,8 @@ export default function Basic(){
         // camera.position.y = cursor.y * 3
         // camera.lookAt(mesh.position)
 
-        
+        // When using damping you also need to make sure you are updating it on each frame
+        controls.update()
 
         // mesh.rotation.y = elapsedTime
         // Render
