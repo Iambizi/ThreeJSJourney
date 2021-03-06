@@ -23,8 +23,8 @@ export default function Basic(){
         
         //Sizes for camera
         const sizes = {
-            width: 800,
-            height: 600
+            width: window.innerWidth,
+            height: window.innerHeight
         }
 
         //camera
@@ -49,6 +49,8 @@ export default function Basic(){
 
         //Controls speed at which damping will happen 
         controls.autoRotateSpeed = 3;
+
+        controls.enableRotate = true;
 
         const renderer = new THREE.WebGLRenderer({
         canvas: canvas

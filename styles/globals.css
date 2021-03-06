@@ -14,8 +14,12 @@ a {
 
 * {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .canvas{
   background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
