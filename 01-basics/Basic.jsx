@@ -14,12 +14,24 @@ export default function Basic(){
         const axesHelper = new THREE.AxesHelper(3);
         scene.add(axesHelper);
 
+        const positionArray = new Float32Array([
+            0,0,0,
+            0,1,0,
+            1,0,0
+        ])
+
+        const positionsAttribute = new THREE.BufferAttribute(positionArray,3)
+
+        const geometry = new THREE.BufferGeometry()
+        geometry.setAttribute('position', positionsAttribute)
+
+        const material = new THREE.MeshBasicMaterial({
+            color: 'silver',
+            wireframe: true
+        })
+
         const mesh = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1, 4, 4, 4),
-            new THREE.MeshBasicMaterial({ 
-                color: 'silver',
-                wireframe: true
-         })
+            geometry, material
         )
         scene.add(mesh)
 
