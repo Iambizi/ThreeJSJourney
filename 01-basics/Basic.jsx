@@ -1,28 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import * as THREE from 'three';
-import gsap from 'gsap';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 export default function Basic(){
 
     useEffect(()=>{
-        /* Custom controls */
-
-        // Cursor: how to control camera with our mouse
-
-        // Stores mouse position in cursor object
-        const cursor = {
-            x: 0,
-            y: 0
-        }
-
-        window.addEventListener('mousemove', (event) =>
-        {
-            cursor.x = event.clientX / sizes.width - 0.5
-            cursor.y = - ( event.clientY / sizes.height - 0.5 )
-
-            console.log(cursor.x, cursor.y)
-        })
 
         //Creat your scene, (your movie set)
         const scene = new THREE.Scene();
@@ -53,8 +36,14 @@ export default function Basic(){
 
         camera.lookAt(mesh.position);
 
+        
+
         //Renderer
         const canvas = document.querySelector('.scene');
+
+        // Control
+        const controls = new OrbitControls(camera, canvas)
+
         const renderer = new THREE.WebGLRenderer({
         canvas: canvas
 
@@ -72,10 +61,12 @@ export default function Basic(){
         const elapsedTime = clock.getElapsedTime();
 
         // Update camera
-        camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 5
-        camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 5
-        camera.position.y = cursor.y * 3
-        camera.lookAt(mesh.position)
+        // camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 5
+        // camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 5
+        // camera.position.y = cursor.y * 3
+        // camera.lookAt(mesh.position)
+
+        
 
         // mesh.rotation.y = elapsedTime
         // Render
