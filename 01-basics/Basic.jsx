@@ -27,6 +27,18 @@ export default function Basic(){
             height: window.innerHeight
         }
 
+        // Full screen mode on double click
+
+        window.addEventListener('dblclick',() =>{
+            if( !document.fullscreenElement ){
+                console.log('goo furrScreeenu')
+                canvas.requestFullscreen()
+            }else{
+                console.log('leave fullscreen')
+                document.exitFullscreen()
+            }
+        });
+
         //camera
         const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
         
@@ -58,6 +70,9 @@ export default function Basic(){
     },[])
 
     renderer.setSize(sizes.width, sizes.height);
+    //pixel ratio: corresponds to how many physical pixels you have on the screen for one pixel unit on the software part.
+    // Device pixel ratio: allows us to adjust the pixel ratio of our scene to pixel ratio of our device
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio),2);
     renderer.render(scene, camera);
 
     // Clock
