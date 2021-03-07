@@ -14,20 +14,20 @@ export default function Basic(){
         const axesHelper = new THREE.AxesHelper(3);
         scene.add(axesHelper);
 
-        const positionArray = new Float32Array([
-            0,0,0,
-            0,1,0,
-            1,0,0
-        ])
+        const geometry = new THREE.BoxGeometry(1,1,1,2,2,2)
 
-        const positionsAttribute = new THREE.BufferAttribute(positionArray,3)
+        // const count = 20;
+        // const positionsArray = new Float32Array( count * 3 * 3);
 
-        const geometry = new THREE.BufferGeometry()
-        geometry.setAttribute('position', positionsAttribute)
+        // const positionsAttribute = new  THREE.BufferAttribute( positionsArray, 3 )
+        // geometry.setAttribute('position', positionsAttribute)
+
+        // for (let i = 0; i < count * 3 * 3; i++){
+        //     positionsArray[i] = (Math.random() - 0.5) * 4
+        // }
 
         const material = new THREE.MeshBasicMaterial({
-            color: 'silver',
-            wireframe: true
+            color: 'silver'
         })
 
         const mesh = new THREE.Mesh(
